@@ -79,12 +79,12 @@ def make_reservation(auth_token,config_id,res_date,party_size):
 def try_table(day,party_size,table_time,auth_token,restaurant):
 	best_table = find_table(day,party_size,table_time,auth_token,restaurant)
 	if best_table is not None:
-        	hour = datetime.datetime.strptime(best_table['date']['start'],"%Y-%m-%d %H:%M:00").hour
-	        if (hour > 19) and (hour < 21):
-               	        config_id = best_table['config']['token']
-                        make_reservation(auth_token,config_id,day,party_size)
-       	                print 'success'
-			return 1
+		hour = datetime.datetime.strptime(best_table['date']['start'],"%Y-%m-%d %H:%M:00").hour
+		if (hour > 19) and (hour < 21):
+			config_id = best_table['config']['token']
+			make_reservation(auth_token,config_id,day,party_size)
+			print ('success')
+		return 1
 	else:
 		time.sleep(1)
 		return 0
@@ -97,7 +97,7 @@ def readconfig():
 def main():
 	username, password, venue, date, guests = readconfig()
 	auth_token,payment_method_string = login(username,password)
-	print 'logged in succesfully - disown this task and allow it to run in the background'
+	print ('logged in succesfully - disown this task and allow it to run in the background')
 	party_size = int(guests)
 	table_time = 20
 	day = datetime.datetime.strptime(date,'%m/%d/%Y')
